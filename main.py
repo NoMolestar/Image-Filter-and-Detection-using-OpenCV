@@ -4,17 +4,26 @@ import cv2
 import random
 
 cap = cv2.VideoCapture(0,cv2.CAP_DSHOW)
+
+#Inicializamos la variable imagen
 image = cv2.imread('Restaurantes/JuvieJus.png', cv2.IMREAD_UNCHANGED)
+
+#Definimos la cantidad de manos a detectar
 detector = HandDetector(detectionCon=0.8, maxHands=1)
+
+#Obtenemos los valores preliminares de detección de rostros
 faceClassif = cv2.CascadeClassifier(cv2.data.haarcascades + 'haarcascade_frontalface_default.xml')
+
+#Bucle infinito
 while True:
 
 	success, frame = cap.read()
 	hands, frame = detector.findHands(frame)
 	faces = faceClassif.detectMultiScale(frame, 1.3, 5)
 
+	#Condicional para ver si encontró manos
 	if hands:
-
+		#Obtiene la imagen dependiendo de un número aleatorio
 		numero = random.randint(1,6)
 		if numero == 1:
 			image = cv2.imread('Restaurantes/JuvieJus.png', cv2.IMREAD_UNCHANGED)
